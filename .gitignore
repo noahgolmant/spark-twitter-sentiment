@@ -2,3 +2,27 @@
 target/
 *.iml
 *.xml
+project/target
+*.class
+*.log
+
+# sbt specific
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+
+# Scala-IDE specific
+.idea*
+.scala_dependencies
+
+# Jars
+*.jar
+
+# vim tmps
+.*sw*
+
+# Jekyll stuff
+_site/
