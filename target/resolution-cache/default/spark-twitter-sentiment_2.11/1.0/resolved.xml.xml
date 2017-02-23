@@ -4,7 +4,7 @@
 		module="spark-twitter-sentiment_2.11"
 		revision="1.0"
 		status="integration"
-		publication="20170222185909"
+		publication="20170222192724"
 	>
 		<description>
 		spark-twitter-sentiment
@@ -39,5 +39,6 @@
 			<artifact name="stanford-corenlp" type="jar" ext="jar" conf="*" e:classifier="models"/>
 		</dependency>
 		<dependency org="org.apache.spark" name="spark-core_2.11" rev="2.1.0" conf="compile->default(compile)"/>
+		<dependency org="org.twitter4j" name="twitter4j-stream" rev="3.0.3" conf="compile->default(compile)"/>
 	</dependencies>
 </ivy-module>
