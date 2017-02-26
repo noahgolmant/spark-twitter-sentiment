@@ -15,7 +15,9 @@ import scala.collection.JavaConversions._
 /**
   * Created by ravi on 2/22/17.
   */
-class SentimentAnalysis(tweetStream: DStream[Status]) {
+class SentimentAnalysis(sc: SparkContext, tweetStream: DStream[Status]) {
+  @volatile var totalTweetCount = sc.longAccumulator("#accumulate")
+
   val props = new Properties()
   props.setProperty("annotators", "tokenize, ssplit, parse, sentiment")
   val pipeline = new StanfordCoreNLP(props)
@@ -32,4 +34,8 @@ class SentimentAnalysis(tweetStream: DStream[Status]) {
   }
 
   val tweetSentiments = tweetStream.map(status => getSentiment(status.getText))
+  tweetSentiments.foreachRDD(rdd => totalTweetCount.add(rdd.count()))
+  val sentimentNums = tweetSentiments.countByValue()
+  val totalSentiments = tweetSentiments.count()
+
 }
